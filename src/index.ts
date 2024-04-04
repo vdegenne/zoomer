@@ -103,9 +103,9 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			const yButtonPressed = gamepad.buttons[3].pressed;
 			const backButtonPressed = gamepad.buttons[8].pressed;
 
-			if (yButtonPressed) {
-				window.close();
-			}
+			// if (yButtonPressed) {
+			// 	window.close();
+			// }
 
 			if (xButtonPressed) {
 				if (preventX) {
