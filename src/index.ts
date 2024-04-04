@@ -90,17 +90,19 @@ const panThreshold = 0.1;
 let preventBack = false;
 let preventX = false;
 
-window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
+window.addEventListener('gamepadconnected', async (event: GamepadEvent) => {
+	await new Promise((r) => setTimeout(r, 1000));
+
 	setInterval(() => {
 		const gamepads = navigator.getGamepads();
 		const gamepad = gamepads[event.gamepad.index];
 		if (gamepad) {
-			const leftStickX = gamepad.axes[0];
+			// const leftStickX = gamepad.axes[0];
 			const leftStickY = gamepad.axes[1];
 			const rightStickX = gamepad.axes[2];
 			const rightStickY = gamepad.axes[3];
 			const xButtonPressed = gamepad.buttons[2].pressed;
-			const yButtonPressed = gamepad.buttons[3].pressed;
+			// const yButtonPressed = gamepad.buttons[3].pressed;
 			const backButtonPressed = gamepad.buttons[8].pressed;
 
 			// if (yButtonPressed) {
