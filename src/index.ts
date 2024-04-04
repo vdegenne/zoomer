@@ -81,7 +81,7 @@ const osd = openseadragon({
 	maxZoomLevel: 1000,
 });
 
-const panFactor = 0.008;
+const panFactor = 0.005;
 const zoomFactor = 0.02;
 const zoomThreshold = 0.1;
 const panThreshold = 0.1;
