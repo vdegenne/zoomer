@@ -20,6 +20,63 @@ const osd = openseadragon({
 		type: 'image',
 		url: img.src,
 	},
+	navImages: {
+		home: {
+			REST: '../zoomer/images/home_rest.png',
+			HOVER: '../zoomer/images/home_hover.png',
+			GROUP: '../zoomer/images/home_grouphover.png',
+			DOWN: '../zoomer/images/home_pressed.png',
+		},
+		zoomIn: {
+			REST: '../zoomer/images/zoomin_rest.png',
+			HOVER: '../zoomer/images/zoomin_hover.png',
+			GROUP: '../zoomer/images/zoomin_grouphover.png',
+			DOWN: '../zoomer/images/zoomin_pressed.png',
+		},
+		zoomOut: {
+			REST: '../zoomer/images/zoomout_rest.png',
+			HOVER: '../zoomer/images/zoomout_hover.png',
+			GROUP: '../zoomer/images/zoomout_grouphover.png',
+			DOWN: '../zoomer/images/zoomout_pressed.png',
+		},
+		flip: {
+			REST: '../zoomer/images/flip_rest.png',
+			HOVER: '../zoomer/images/flip_hover.png',
+			GROUP: '../zoomer/images/flip_grouphover.png',
+			DOWN: '../zoomer/images/flip_pressed.png',
+		},
+		next: {
+			REST: '../zoomer/images/next_rest.png',
+			HOVER: '../zoomer/images/next_hover.png',
+			GROUP: '../zoomer/images/next_grouphover.png',
+			DOWN: '../zoomer/images/next_pressed.png',
+		},
+		fullpage: {
+			REST: '../zoomer/images/fullpage_rest.png',
+			HOVER: '../zoomer/images/fullpage_hover.png',
+			GROUP: '../zoomer/images/fullpage_grouphover.png',
+			DOWN: '../zoomer/images/fullpage_pressed.png',
+		},
+		previous: {
+			REST: '../zoomer/images/previous_rest.png',
+			HOVER: '../zoomer/images/previous_hover.png',
+			GROUP: '../zoomer/images/previous_grouphover.png',
+			DOWN: '../zoomer/images/previous_pressed.png',
+		},
+		rotateleft: {
+			REST: '../zoomer/images/rotateleft_rest.png',
+			HOVER: '../zoomer/images/rotateleft_hover.png',
+			GROUP: '../zoomer/images/rotateleft_grouphover.png',
+			DOWN: '../zoomer/images/rotateleft_pressed.png',
+		},
+		rotateright: {
+			REST: '../zoomer/images/rotateright_rest.png',
+			HOVER: '../zoomer/images/rotateright_hover.png',
+			GROUP: '../zoomer/images/rotateright_grouphover.png',
+			DOWN: '../zoomer/images/rotateright_pressed.png',
+		},
+	},
+	navigatorOpacity: 0,
 	useCanvas: false,
 	maxZoomLevel: 1000,
 });
