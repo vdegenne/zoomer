@@ -1,0 +1,47 @@
+{
+  "name": "zoomer",
+  "description": "Zoom in",
+  "type": "module",
+  "main": "",
+  "module": "",
+  "exports": {
+    ".": {}
+  },
+  "types": "",
+  "scripts": {
+    "build": "wireit",
+    "dev": "wireit"
+  },
+  "files": [],
+  "devDependencies": {
+    "@snar/lit": "^1.5.1",
+    "@types/openseadragon": "^3.0.10",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "custom-element-decorator": "^0.6.0",
+    "lit": "^3.1.2",
+    "lit-with-styles": "^2.1.3",
+    "openseadragon": "^4.1.1",
+    "snar": "^2.2.0",
+    "snar-save-to-local-storage": "^1.0.1",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.8",
+    "wireit": "^0.14.4"
+  },
+  "wireit": {
+    "build": {
+      "command": "vite build",
+      "files": [
+        "vite.config.js"
+      ]
+    },
+    "dev": {
+      "command": "vite --host",
+      "files": [
+        "vite.config.js"
+      ],
+      "output": [
+        "./node_modules/.vite"
+      ]
+    }
+  }
+}
