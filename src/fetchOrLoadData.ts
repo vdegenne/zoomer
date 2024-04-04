@@ -45,14 +45,3 @@ export async function fetchOrLoadImage(url: string) {
 		});
 	}
 }
-
-// Example usage:
-const imageUrl = 'https://example.com/image.jpg';
-fetchOrLoadImage(imageUrl)
-	.then((rawImageData) => {
-		// Handle the raw image data
-		console.log('Raw image data:', rawImageData);
-	})
-	.catch((error) => {
-		console.error('Error:', error);
-	});
