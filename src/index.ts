@@ -1,5 +1,6 @@
 import openseadragon, {Point} from 'openseadragon';
 import {getImgQueryParam} from './utils.js';
+import {XBoxButton} from 'esm-gamecontroller.js';
 
 declare global {
 	interface Window {
@@ -86,6 +87,9 @@ const zoomFactor = 0.02;
 const zoomThreshold = 0.1;
 const panThreshold = 0.1;
 
+let preventBack = false;
+let preventX = false;
+
 window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 	setInterval(() => {
 		const gamepads = navigator.getGamepads();
@@ -96,6 +100,33 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			const rightStickY = gamepad.axes[3];
 			const xButtonPressed = gamepad.buttons[2].pressed;
 			const yButtonPressed = gamepad.buttons[3].pressed;
+			const backButtonPressed = gamepad.buttons[8].pressed;
+
+			if (xButtonPressed) {
+				if (preventX) {
+					return;
+				}
+				if (!document.fullscreenElement) {
+					osd.setFullScreen(true);
+				} else {
+					osd.setFullScreen(false);
+				}
+				preventX = true;
+				return;
+			} else {
+				preventX = false;
+			}
+
+			if (backButtonPressed) {
+				if (preventBack) {
+					return;
+				}
+				osd.viewport.goHome();
+				preventBack = true;
+				return;
+			} else {
+				preventBack = false;
+			}
 
 			const panByX =
 				Math.abs(leftStickX) > panThreshold
@@ -112,16 +143,6 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 				const zoomFactorAdjusted =
 					Math.pow(Math.abs(rightStickY), 2) * zoomFactor * zoomDirection;
 				osd.viewport.zoomBy(1 + zoomFactorAdjusted, undefined, false);
-			}
-
-			if (xButtonPressed) osd.viewport.goHome();
-
-			if (yButtonPressed) {
-				if (!document.fullscreenElement) {
-					osd.setFullScreen(true);
-				} else {
-					osd.setFullScreen(false);
-				}
 			}
 		}
 	}, 10);
