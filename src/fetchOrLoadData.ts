@@ -23,6 +23,7 @@ export async function fetchOrLoadImage(url: string) {
 
 		// If fetch fails, load the image directly into an <img> element
 		const imgElement = document.createElement('img');
+		imgElement.crossOrigin = 'Anonymous';
 		imgElement.src = url;
 
 		return new Promise((resolve, reject) => {
