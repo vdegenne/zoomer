@@ -95,7 +95,7 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 		const gamepads = navigator.getGamepads();
 		const gamepad = gamepads[event.gamepad.index];
 		if (gamepad) {
-			// const leftStickX = gamepad.axes[0];
+			const leftStickX = gamepad.axes[0];
 			const leftStickY = gamepad.axes[1];
 			const rightStickX = gamepad.axes[2];
 			const rightStickY = gamepad.axes[3];
@@ -134,19 +134,19 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			}
 
 			const panByX =
-				Math.abs(rightStickX) > panThreshold
-					? Math.sign(rightStickX) * Math.pow(rightStickX, 2) * panFactor
+				Math.abs(leftStickX) > panThreshold
+					? Math.sign(leftStickX) * Math.pow(leftStickX, 2) * panFactor
 					: 0;
 			const panByY =
-				Math.abs(rightStickY) > panThreshold
-					? Math.sign(rightStickY) * Math.pow(rightStickY, 2) * panFactor
+				Math.abs(leftStickY) > panThreshold
+					? Math.sign(leftStickY) * Math.pow(leftStickY, 2) * panFactor
 					: 0;
 			osd.viewport.panBy(new Point(panByX, panByY), false);
 
-			if (Math.abs(leftStickY) > zoomThreshold) {
-				const zoomDirection = -Math.sign(leftStickY);
+			if (Math.abs(rightStickY) > zoomThreshold) {
+				const zoomDirection = -Math.sign(rightStickY);
 				const zoomFactorAdjusted =
-					Math.pow(Math.abs(leftStickY), 2) * zoomFactor * zoomDirection;
+					Math.pow(Math.abs(rightStickY), 2) * zoomFactor * zoomDirection;
 				osd.viewport.zoomBy(1 + zoomFactorAdjusted, undefined, false);
 			}
 		}
