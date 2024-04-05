@@ -100,12 +100,13 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			const rightStickX = gamepad.axes[2];
 			const rightStickY = gamepad.axes[3];
 			const xButtonPressed = gamepad.buttons[2].pressed;
-			// const yButtonPressed = gamepad.buttons[3].pressed;
+			const yButtonPressed = gamepad.buttons[3].pressed;
 			const backButtonPressed = gamepad.buttons[8].pressed;
+			const leftTriggerPressed = gamepad.buttons[6].pressed;
 
-			// if (yButtonPressed) {
-			// 	window.close();
-			// }
+			if (leftTriggerPressed && yButtonPressed) {
+				window.close();
+			}
 
 			if (xButtonPressed) {
 				if (preventX) {
