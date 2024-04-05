@@ -90,9 +90,7 @@ const panThreshold = 0.1;
 let preventBack = false;
 let preventX = false;
 
-window.addEventListener('gamepadconnected', async (event: GamepadEvent) => {
-	await new Promise((r) => setTimeout(r, 1000));
-
+window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 	setInterval(() => {
 		const gamepads = navigator.getGamepads();
 		const gamepad = gamepads[event.gamepad.index];
