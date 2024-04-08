@@ -92,11 +92,12 @@ let preventX = false;
 let preventY = false;
 let preventGuide = false;
 
-let guard = false;
+let guard: boolean | undefined = undefined;
 window.addEventListener('blur', () => (guard = true));
 window.addEventListener('focus', () => {
 	setTimeout(() => (guard = false), 800);
 });
+setTimeout(() => (guard = false), 500);
 
 window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 	setInterval(() => {
