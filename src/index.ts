@@ -89,23 +89,53 @@ const panThreshold = 0.1;
 
 let preventBack = false;
 let preventX = false;
+let preventY = false;
+let preventGuide = false;
+
+let guard = false;
+window.addEventListener('blur', () => (guard = true));
+window.addEventListener('focus', () => {
+	setTimeout(() => (guard = false), 800);
+});
 
 window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 	setInterval(() => {
+		if (guard) return;
 		const gamepads = navigator.getGamepads();
 		const gamepad = gamepads[event.gamepad.index];
 		if (gamepad) {
 			const leftStickX = gamepad.axes[0];
 			const leftStickY = gamepad.axes[1];
-			const rightStickX = gamepad.axes[2];
+			// const rightStickX = gamepad.axes[2];
 			const rightStickY = gamepad.axes[3];
 			const xButtonPressed = gamepad.buttons[2].pressed;
 			const yButtonPressed = gamepad.buttons[3].pressed;
 			const backButtonPressed = gamepad.buttons[8].pressed;
-			const leftTriggerPressed = gamepad.buttons[6].pressed;
+			// const leftTriggerPressed = gamepad.buttons[6].pressed;
+			const guidePressed = gamepad.buttons[16].pressed;
 
-			if (leftTriggerPressed && yButtonPressed) {
-				window.close();
+			if (yButtonPressed) {
+				if (preventY) {
+					return;
+				}
+				document.dispatchEvent(new Event('xbox-y', {bubbles: true}));
+				preventY = true;
+				return;
+			} else if (preventY !== false) {
+				preventY = false;
+				return;
+			}
+
+			if (guidePressed) {
+				if (preventGuide) {
+					return;
+				}
+				document.dispatchEvent(new Event('xbox-guide', {bubbles: true}));
+				preventGuide = true;
+				return;
+			} else if (preventGuide !== false) {
+				preventGuide = false;
+				return;
 			}
 
 			if (xButtonPressed) {
@@ -119,8 +149,9 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 				}
 				preventX = true;
 				return;
-			} else {
+			} else if (preventX !== false) {
 				preventX = false;
+				return;
 			}
 
 			if (backButtonPressed) {
