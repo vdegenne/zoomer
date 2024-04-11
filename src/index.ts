@@ -114,6 +114,7 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			const backButtonPressed = gamepad.buttons[8].pressed;
 			// const leftTriggerPressed = gamepad.buttons[6].pressed;
 			const guidePressed = gamepad.buttons[16].pressed;
+			const leftTriggerPressed = gamepad.buttons[6].pressed;
 
 			if (yButtonPressed) {
 				if (preventY) {
@@ -131,7 +132,10 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 				if (preventGuide) {
 					return;
 				}
-				document.dispatchEvent(new Event('xbox-guide', {bubbles: true}));
+				let eventType = leftTriggerPressed
+					? 'xbox-guide-secondary'
+					: 'xbox-guide';
+				document.dispatchEvent(new Event(eventType, {bubbles: true}));
 				preventGuide = true;
 				return;
 			} else if (preventGuide !== false) {
