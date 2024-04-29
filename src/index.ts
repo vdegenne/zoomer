@@ -95,7 +95,7 @@ let preventGuide = false;
 let guard: boolean | undefined = undefined;
 window.addEventListener('blur', () => (guard = true));
 window.addEventListener('focus', () => {
-	setTimeout(() => (guard = false), 800);
+	setTimeout(() => (guard = false), 500);
 });
 setTimeout(() => (guard = false), 500);
 
