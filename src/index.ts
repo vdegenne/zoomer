@@ -116,32 +116,32 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			const guidePressed = gamepad.buttons[16].pressed;
 			const leftTriggerPressed = gamepad.buttons[6].pressed;
 
-			if (yButtonPressed) {
-				if (preventY) {
-					return;
-				}
-				document.dispatchEvent(new Event('xbox-y', {bubbles: true}));
-				preventY = true;
-				return;
-			} else if (preventY !== false) {
-				preventY = false;
-				return;
-			}
-
-			if (guidePressed) {
-				if (preventGuide) {
-					return;
-				}
-				let eventType = leftTriggerPressed
-					? 'xbox-guide-secondary'
-					: 'xbox-guide';
-				document.dispatchEvent(new Event(eventType, {bubbles: true}));
-				preventGuide = true;
-				return;
-			} else if (preventGuide !== false) {
-				preventGuide = false;
-				return;
-			}
+			// if (yButtonPressed) {
+			// 	if (preventY) {
+			// 		return;
+			// 	}
+			// 	document.dispatchEvent(new Event('xbox-y', {bubbles: true}));
+			// 	preventY = true;
+			// 	return;
+			// } else if (preventY !== false) {
+			// 	preventY = false;
+			// 	return;
+			// }
+			//
+			// if (guidePressed) {
+			// 	if (preventGuide) {
+			// 		return;
+			// 	}
+			// 	let eventType = leftTriggerPressed
+			// 		? 'xbox-guide-secondary'
+			// 		: 'xbox-guide';
+			// 	document.dispatchEvent(new Event(eventType, {bubbles: true}));
+			// 	preventGuide = true;
+			// 	return;
+			// } else if (preventGuide !== false) {
+			// 	preventGuide = false;
+			// 	return;
+			// }
 
 			if (xButtonPressed) {
 				if (preventX) {
