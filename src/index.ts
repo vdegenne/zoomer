@@ -87,7 +87,7 @@ const zoomFactor = 0.02;
 const zoomThreshold = 0.1;
 const panThreshold = 0.1;
 
-let preventAButton = false;
+let preventRightStickButton = false;
 let preventX = false;
 let preventY = false;
 let preventGuide = false;
@@ -111,7 +111,7 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			const rightStickY = gamepad.axes[3];
 			const xButtonPressed = gamepad.buttons[2].pressed;
 			const yButtonPressed = gamepad.buttons[3].pressed;
-			const aButtonPressed = gamepad.buttons[0].pressed;
+			const rightStickPressed = gamepad.buttons[11].pressed;
 			const backButtonPressed = gamepad.buttons[8].pressed;
 			// const leftTriggerPressed = gamepad.buttons[6].pressed;
 			const guidePressed = gamepad.buttons[16].pressed;
@@ -160,15 +160,15 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 				return;
 			}
 
-			if (aButtonPressed) {
-				if (preventAButton) {
+			if (rightStickPressed) {
+				if (preventRightStickButton) {
 					return;
 				}
 				osd.viewport.goHome();
-				preventAButton = true;
+				preventRightStickButton = true;
 				return;
 			} else {
-				preventAButton = false;
+				preventRightStickButton = false;
 			}
 
 			const panByX =
