@@ -14,7 +14,7 @@ export default defineConfig({
 		// proxy: {'/api': 'http://localhost:45085'},
 	},
 	build: {
-		outDir: 'docs',
+		// outDir: 'docs',
 		// emptyOutDir: false,
 		// assetsInlineLimit: 6000,
 		// rollupOptions: {
