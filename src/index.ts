@@ -1,6 +1,5 @@
 import openseadragon, {Point} from 'openseadragon';
 import {getImgQueryParam} from './utils.js';
-import {XBoxButton} from 'esm-gamecontroller.js';
 
 declare global {
 	interface Window {
@@ -17,6 +16,7 @@ img.src = url;
 
 const osd = openseadragon({
 	element: window.openseadragonContainer,
+	showNavigationControl: false,
 	tileSources: {
 		type: 'image',
 		url: img.src,
