@@ -1,5 +1,7 @@
 import openseadragon, {Point} from 'openseadragon';
 import {getImgQueryParam} from './utils.js';
+import {MiniGamepad, Mode} from '@vdegenne/mini-gamepad';
+import {toast} from 'toastit';
 
 declare global {
 	interface Window {
@@ -82,11 +84,6 @@ const osd = openseadragon({
 	maxZoomLevel: 1000,
 });
 
-const panFactor = 0.004;
-const zoomFactor = 0.02;
-const zoomThreshold = 0.1;
-const panThreshold = 0.1;
-
 let preventRightStickButton = false;
 let preventX = false;
 let preventY = false;
@@ -100,6 +97,7 @@ window.addEventListener('focus', () => {
 setTimeout(() => (guard = false), 500);
 
 window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
+	return;
 	setInterval(() => {
 		if (guard) return;
 		const gamepads = navigator.getGamepads();
@@ -189,4 +187,118 @@ window.addEventListener('gamepadconnected', (event: GamepadEvent) => {
 			}
 		}
 	}, 10);
+});
+
+const panFactor = 0.011;
+const panThreshold = 0.2;
+const zoomFactor = 0.02;
+const zoomThreshold = 0.2;
+let leftStickX = 0;
+let leftStickY = 0;
+let rightStickY = 0;
+
+function loop() {
+	const zoomLevel = osd.viewport.getZoom(); // Assuming this function gets the current zoom level
+	const zoomFactorAdjusted = Math.pow(Math.abs(rightStickY), 2) * zoomFactor;
+	const zoomDirection = -Math.sign(rightStickY); // Determine the zoom direction based on the stick movement
+
+	// Adjust the pan speed based on the zoom level
+	const panSpeedAdjustment = zoomLevel > 1 ? 1 / zoomLevel : 1; // Reduce pan speed when zoom is high
+
+	const panByX =
+		Math.abs(leftStickX) > panThreshold
+			? Math.sign(leftStickX) *
+				Math.pow(leftStickX, 2) *
+				panFactor *
+				panSpeedAdjustment
+			: 0;
+	const panByY =
+		Math.abs(leftStickY) > panThreshold
+			? Math.sign(leftStickY) *
+				Math.pow(leftStickY, 2) *
+				panFactor *
+				panSpeedAdjustment
+			: 0;
+
+	// Apply panning and zooming
+	osd.viewport.panBy(new Point(panByX, panByY), false);
+	if (Math.abs(rightStickY) > zoomThreshold) {
+		osd.viewport.zoomBy(
+			1 + zoomFactorAdjusted * zoomDirection,
+			undefined,
+			false,
+		); // Apply zoom direction
+	}
+
+	requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+const minigp = new MiniGamepad({pollSleepMs: 0, axesThreshold: 0});
+
+minigp.onConnect((gamepad) => {
+	const {
+		LEFT_STICK_UP,
+		LEFT_STICK_DOWN,
+		LEFT_STICK_LEFT,
+		LEFT_STICK_RIGHT,
+		RIGHT_BUTTONS_LEFT,
+		RIGHT_STICK_UP,
+		RIGHT_STICK_DOWN,
+	} = gamepad.mapping;
+
+	gamepad
+		.for(LEFT_STICK_UP, LEFT_STICK_DOWN)
+		.on(({mode, value}) => {
+			switch (mode) {
+				case Mode.NORMAL:
+					leftStickY = value;
+					break;
+				default:
+					leftStickY = 0;
+			}
+			return;
+		})
+		.after(() => {
+			leftStickY = 0;
+		});
+
+	gamepad
+		.for(LEFT_STICK_LEFT, LEFT_STICK_RIGHT)
+		.on(({mode, value}) => {
+			switch (mode) {
+				case Mode.NORMAL:
+					leftStickX = value;
+					break;
+				default:
+					leftStickX = 0;
+			}
+			return;
+		})
+		.after(() => {
+			leftStickX = 0;
+		});
+
+	gamepad
+		.for(RIGHT_STICK_UP, RIGHT_STICK_DOWN)
+		.on(({mode, value}) => {
+			switch (mode) {
+				case Mode.NORMAL:
+					console.log(value);
+					rightStickY = value;
+					break;
+			}
+			return;
+		})
+		.after(() => {
+			rightStickY = 0;
+		});
+
+	gamepad.for(RIGHT_BUTTONS_LEFT).before(({mode}) => {
+		if (!document.fullscreenElement) {
+			osd.setFullScreen(true);
+		} else {
+			osd.setFullScreen(false);
+		}
+	});
 });
