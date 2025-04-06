@@ -256,6 +256,7 @@ minigp.onConnect((gamepad) => {
 					break;
 				default:
 					leftStickY = 0;
+					break;
 			}
 			return;
 		})
