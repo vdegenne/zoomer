@@ -234,7 +234,11 @@ function loop() {
 }
 requestAnimationFrame(loop);
 
-const minigp = new MiniGamepad({pollSleepMs: 0, axesThreshold: 0});
+const minigp = new MiniGamepad({
+	pollSleepMs: 0,
+	axesThreshold: 0,
+	toastModel: false,
+});
 
 minigp.onConnect((gamepad) => {
 	const {
