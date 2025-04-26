@@ -289,7 +289,7 @@ minigp.onConnect((gamepad) => {
 		.on(({mode, value}) => {
 			switch (mode) {
 				case Mode.NORMAL:
-					console.log(value);
+					// console.log(value);
 					rightStickY = value;
 					break;
 			}
