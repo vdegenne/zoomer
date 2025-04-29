@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@snar/lit": "^1.6.0",
 		"@types/openseadragon": "^3.0.10",
-		"@vdegenne/mini-gamepad": "^0.2.10",
+		"@vdegenne/mini-gamepad": "^0.3.3",
 		"@vitejs/plugin-basic-ssl": "^2.0.0",
 		"custom-element-decorator": "^0.6.0",
 		"esm-gamecontroller.js": "^2.3.0",
