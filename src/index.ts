@@ -237,10 +237,18 @@ requestAnimationFrame(loop);
 const minigp = new MiniGamepad({
 	pollSleepMs: 0,
 	axesThreshold: 0,
-	toastModel: false,
 });
 
 minigp.onConnect((gamepad) => {
+	window.addEventListener('voice-recorder-open', () => {
+		gamepad.enabled = false;
+	});
+	window.addEventListener('voice-recorder-close', () => {
+		setTimeout(() => {
+			gamepad.enabled = true;
+		}, 20);
+	});
+
 	const {
 		LEFT_STICK_UP,
 		LEFT_STICK_DOWN,
