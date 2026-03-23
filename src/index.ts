@@ -240,14 +240,14 @@ const minigp = new MiniGamepad({
 });
 
 minigp.onConnect((gamepad) => {
-	window.addEventListener('voice-recorder-open', () => {
-		gamepad.enabled = false;
-	});
-	window.addEventListener('voice-recorder-close', () => {
-		setTimeout(() => {
-			gamepad.enabled = true;
-		}, 20);
-	});
+	// window.addEventListener('voice-recorder-open', () => {
+	// 	gamepad.enabled = false;
+	// });
+	// window.addEventListener('voice-recorder-close', () => {
+	// 	setTimeout(() => {
+	// 		gamepad.enabled = true;
+	// 	}, 20);
+	// });
 
 	const {
 		LEFT_STICK_UP,
