@@ -17,7 +17,7 @@
 		"@snar/lit": "^1.8.1",
 		"@types/openseadragon": "^5.0.2",
 		"@vdegenne/mini-gamepad": "^0.4.15",
-		"@vitejs/plugin-basic-ssl": "^2.2.0",
+		"@vitejs/plugin-basic-ssl": "^2.3.0",
 		"custom-element-decorator": "^0.6.0",
 		"esm-gamecontroller.js": "^2.3.1",
 		"lit": "^3.3.2",
@@ -27,7 +27,7 @@
 		"snar-save-to-local-storage": "^1.0.1",
 		"toastit": "^2.2.2",
 		"typescript": "^6.0.2",
-		"vite": "^8.0.2",
+		"vite": "^8.0.4",
 		"wireit": "^0.14.12"
 	},
 	"wireit": {
