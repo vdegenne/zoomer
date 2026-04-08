@@ -1,3 +1,4 @@
+import toast from 'toastit';
 import {MiniGamepad, Mode} from '@vdegenne/mini-gamepad';
 import {run} from '@vdegenne/py-server';
 import openseadragon, {Point} from 'openseadragon';
@@ -319,8 +320,14 @@ minigp.onConnect((gamepad) => {
 
 	gamepad.for(LEFT_STICK_PRESS).before(({mode}) => {
 		switch (mode) {
-			case Mode.NORMAL:
-				run('$HOME/bin/screenshot.sh');
+			case Mode.SECONDARY:
+				if (document.fullscreenElement) {
+					run('$HOME/bin/screenshot.sh');
+					toast('Screenshotted');
+				} else {
+					run('$HOME/bin/screenshot.sh --no-top');
+					toast('Screenshotted (--no-top)');
+				}
 				break;
 		}
 	});
