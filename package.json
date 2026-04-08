@@ -17,6 +17,7 @@
 		"@snar/lit": "^1.8.1",
 		"@types/openseadragon": "^5.0.2",
 		"@vdegenne/mini-gamepad": "^0.4.15",
+		"@vdegenne/py-server": "^0.1.7",
 		"@vitejs/plugin-basic-ssl": "^2.3.0",
 		"custom-element-decorator": "^0.6.0",
 		"esm-gamecontroller.js": "^2.3.1",

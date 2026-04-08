@@ -1,7 +1,7 @@
+import {MiniGamepad, Mode} from '@vdegenne/mini-gamepad';
+import {run} from '@vdegenne/py-server';
 import openseadragon, {Point} from 'openseadragon';
 import {getImgQueryParam} from './utils.js';
-import {MiniGamepad, Mode} from '@vdegenne/mini-gamepad';
-import {toast} from 'toastit';
 
 declare global {
 	interface Window {
@@ -307,9 +307,10 @@ minigp.onConnect((gamepad) => {
 			rightStickY = 0;
 		});
 
-	gamepad.for(RIGHT_BUTTONS_LEFT).before(({mode}) => {
+	gamepad.for(RIGHT_BUTTONS_LEFT).before(({mode: _mode}) => {
 		if (!document.fullscreenElement) {
 			osd.setFullScreen(true);
+			run('$HOME/bin/remove-chrome-exit-fullscreen-banner');
 		} else {
 			osd.setFullScreen(false);
 		}
