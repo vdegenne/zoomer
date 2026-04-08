@@ -257,6 +257,7 @@ minigp.onConnect((gamepad) => {
 		RIGHT_BUTTONS_LEFT,
 		RIGHT_STICK_UP,
 		RIGHT_STICK_DOWN,
+		LEFT_STICK_PRESS,
 	} = gamepad.mapping;
 
 	gamepad
@@ -313,6 +314,14 @@ minigp.onConnect((gamepad) => {
 			run('$HOME/bin/remove-chrome-exit-fullscreen-banner');
 		} else {
 			osd.setFullScreen(false);
+		}
+	});
+
+	gamepad.for(LEFT_STICK_PRESS).before(({mode}) => {
+		switch (mode) {
+			case Mode.NORMAL:
+				run('$HOME/bin/screenshot.sh');
+				break;
 		}
 	});
 });
