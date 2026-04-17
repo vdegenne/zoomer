@@ -81,8 +81,10 @@ const osd = openseadragon({
 		},
 	},
 	navigatorOpacity: 0,
-	useCanvas: false,
+	// useCanvas: false,
+	drawer: 'canvas',
 	maxZoomLevel: 1000,
+	// crossOriginPolicy: 'Anonymous',
 });
 
 let preventRightStickButton = false;
