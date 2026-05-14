@@ -10,7 +10,32 @@
 	"types": "",
 	"scripts": {
 		"build": "wireit",
-		"dev": "wireit"
+		"dev": "wireit",
+		"push:posters": "wireit"
+	},
+	"wireit": {
+		"build": {
+			"command": "vite build",
+			"files": [
+				"vite.config.js"
+			]
+		},
+		"push:posters": {
+			"command": "git add public/posters && git commit -m \"posters $(date +%Y-%m-%d)\" && git push",
+			"files": [
+				"./public/posters/"
+			],
+			"output": []
+		},
+		"dev": {
+			"command": "vite --host",
+			"files": [
+				"vite.config.js"
+			],
+			"output": [
+				"./node_modules/.vite"
+			]
+		}
 	},
 	"files": [],
 	"devDependencies": {
@@ -30,22 +55,5 @@
 		"typescript": "^6.0.2",
 		"vite": "^8.0.4",
 		"wireit": "^0.14.12"
-	},
-	"wireit": {
-		"build": {
-			"command": "vite build",
-			"files": [
-				"vite.config.js"
-			]
-		},
-		"dev": {
-			"command": "vite --host",
-			"files": [
-				"vite.config.js"
-			],
-			"output": [
-				"./node_modules/.vite"
-			]
-		}
 	}
 }
