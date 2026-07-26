@@ -311,12 +311,14 @@ minigp.onConnect((gamepad) => {
 			rightStickY = 0;
 		});
 
-	gamepad.for(RIGHT_BUTTONS_LEFT).before(({mode: _mode}) => {
-		if (!document.fullscreenElement) {
-			osd.setFullScreen(true);
-			run('$HOME/bin/remove-chrome-exit-fullscreen-banner');
-		} else {
-			osd.setFullScreen(false);
+	gamepad.for(RIGHT_BUTTONS_LEFT).before(({mode}) => {
+		if (mode === Mode.NORMAL) {
+			if (!document.fullscreenElement) {
+				osd.setFullScreen(true);
+				run('$HOME/bin/remove-chrome-exit-fullscreen-banner');
+			} else {
+				osd.setFullScreen(false);
+			}
 		}
 	});
 
